@@ -29,8 +29,8 @@
 if platform?("ubuntu", "debian")
 	sfxarch = node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "x86"
 	urlarch = node['kernel']['machine'] =~ /x86_64/ ? "x64" : "i386"
-	remote_file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb.sh" do
-		source "http://download.beyondtrust.com/PBISO/#{node['pbis-open']['version']}/linux.deb.#{urlarch}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb.sh"
+	remote_file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb.sh" do
+		source "http://download.beyondtrust.com/PBISO/#{node['pbis_open']['version']}/linux.deb.#{urlarch}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb.sh"
 		action :create_if_missing
 	end
 end
@@ -42,8 +42,8 @@ if platform?("ubuntu", "debian")
 		sfxarch = node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "x86"
 		action :run
 		cwd "#{Chef::Config[:file_cache_path]}"
-		command "sh #{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb.sh --noexec"
-		creates "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/install.sh"
+		command "sh #{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb.sh --noexec"
+		creates "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb/install.sh"
 	end
 end
 
@@ -52,10 +52,10 @@ end
 if platform?("ubuntu", "debian")
 	debarch = node['kernel']['machine'] =~ /x86_64/ ? "amd64" : "i386"
 	sfxarch = node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "x86"
-	file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open-upgrade_#{node['pbis-open']['version']}_#{debarch}.deb" do
+	file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open-upgrade_#{node['pbis_open']['version']}_#{debarch}.deb" do
 		action :nothing
 	end
-	file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open_#{node['pbis-open']['version']}_#{debarch}.deb" do
+	file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open_#{node['pbis_open']['version']}_#{debarch}.deb" do
 		action :nothing
 	end
 end
@@ -65,13 +65,13 @@ end
 if platform?("ubuntu", "debian")
 	debarch = node['kernel']['machine'] =~ /x86_64/ ? "amd64" : "i386"
 	sfxarch = node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "x86"
-	package "pbis-open-upgrade_#{node['pbis-open']['version']}_#{debarch}.deb" do
-		source "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open-upgrade_#{node['pbis-open']['version']}_#{debarch}.deb"
+	package "pbis-open-upgrade_#{node['pbis_open']['version']}_#{debarch}.deb" do
+		source "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open-upgrade_#{node['pbis_open']['version']}_#{debarch}.deb"
 		provider Chef::Provider::Package::Dpkg
 		action :install
 	end
-	package "pbis-open_#{node['pbis-open']['version']}_#{debarch}.deb" do
-		source "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open_#{node['pbis-open']['version']}_#{debarch}.deb"
+	package "pbis-open_#{node['pbis_open']['version']}_#{debarch}.deb" do
+		source "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis_open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open_#{node['pbis_open']['version']}_#{debarch}.deb"
 		provider Chef::Provider::Package::Dpkg
 		action :install
 	end

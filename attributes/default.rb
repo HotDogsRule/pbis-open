@@ -24,9 +24,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-default["pbis-open"]["version"] = "7.5.2.1527"
-default["pbis-open"]["domain"] = "CONTOSO.COM"
-default["pbis-open"]["encryption-key-path"] = ""
-default["pbis-open"]["default-domain"] = "true"
-default["pbis-open"]["login-shell-template"] = "/bin/bash"
-default["pbis-open"]["home-dir-template"] = "%H/%U"
+default["pbis_open"]["version"] = "7.5.2.1527"
+default["pbis_open"]["domain"] = "CONTOSO.COM"
+default["pbis_open"]["encryption_key_path"] = ""
+default["pbis_open"]["default_domain"] = "true"
+default["pbis_open"]["login_shell_template"] = "/bin/bash"
+default["pbis_open"]["home_dir_template"] = "%H/%U"
+
+default["pbis_open"]["sudo_groups"] = ["domain^admins"]

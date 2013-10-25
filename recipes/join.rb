@@ -24,31 +24,31 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-join_secret = Chef::EncryptedDataBagItem.load_secret("#{node['pbis-open']['encryption-key-path']}")
+join_secret = Chef::EncryptedDataBagItem.load_secret("#{node['pbis_open']['encryption_key_path']}")
 join = Chef::EncryptedDataBagItem.load('pbis-open', 'join', join_secret)
 username = join['username']
 password = join['password']
 
 # Join domain
 
-execute "pbis-open-join-domain" do
+execute "pbis_open_join_domain" do
 	action :run
-	command "/opt/pbis/bin/domainjoin-cli join #{node['pbis-open']['domain']} #{username} #{password}"
+	command "/opt/pbis/bin/domainjoin-cli join #{node['pbis_open']['domain']} #{username} #{password}"
 end
 
 # Set some defaults
 
-execute "assume-default-domain" do
+execute "assume_default_domain" do
 	action :run
-	command "/opt/pbis/bin/config AssumeDefaultDomain #{node['pbis-open']['default-domain']}"
+	command "/opt/pbis/bin/config AssumeDefaultDomain #{node['pbis_open']['default_domain']}"
 end
 
-execute "login-shell-template" do
+execute "login_shell_template" do
 	action :run
-	command "/opt/pbis/bin/config LoginShellTemplate #{node['pbis-open']['login-shell-template']}"
+	command "/opt/pbis/bin/config LoginShellTemplate #{node['pbis_open']['login_shell_template']}"
 end
 
-execute "home-dir-template" do
+execute "home_dir_template" do
 	action :run
-	command "/opt/pbis/bin/config HomeDirTemplate #{node['pbis-open']['home-dir-template']}"
+	command "/opt/pbis/bin/config HomeDirTemplate #{node['pbis_open']['home_dir_template']}"
 end

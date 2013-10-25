@@ -24,9 +24,12 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-template "/etc/sudoers.d/domain-sudo" do
-	source "domain-sudo.erb"
+template "/etc/sudoers.d/domain_sudo" do
+	source "domain_sudo.erb"
 	owner "root"
 	group "root"
 	mode 0440
+	variables({
+     :sudo_groups => node[:pbis_open][:sudo_groups]
+  })
 end
