@@ -26,3 +26,4 @@
 
 default["pbis-open"]["version"] = "7.5.2.1527"
 default["pbis-open"]["domain"] = "CONTOSO.COM"
+default["pbis-open"]["encryption-key-path"] = ""

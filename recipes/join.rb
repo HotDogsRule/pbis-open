@@ -24,7 +24,8 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-join = Chef::EncryptedDataBagItem.load("pbis-open", 'join')
+join_secret = Chef::EncryptedDataBagItem.load_secret("#{node['pbis-open']['encryption-key-path']}")
+join = Chef::EncryptedDataBagItem.load('pbis-open', 'join', join_secret)
 username = join['username']
 password = join['password']
 

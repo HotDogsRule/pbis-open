@@ -53,10 +53,10 @@ if platform?("ubuntu", "debian")
 	debarch = node['kernel']['machine'] =~ /x86_64/ ? "amd64" : "i386"
 	sfxarch = node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "x86"
 	file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open-upgrade_#{node['pbis-open']['version']}_#{debarch}.deb" do
-		action :create_if_missing
+		action :nothing
 	end
 	file "#{Chef::Config[:file_cache_path]}/pbis-open-#{node['pbis-open']['version']}.linux.#{sfxarch}.deb/packages/pbis-open_#{node['pbis-open']['version']}_#{debarch}.deb" do
-		action :create_if_missing
+		action :nothing
 	end
 end
 
