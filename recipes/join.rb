@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: pbis-open
-# Attributes:: default
+# Recipe:: join
 #
 # Copyright 2013, Noah Mehl
 #
@@ -24,5 +24,15 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-default["pbis-open"]["version"] = "7.5.2.1527"
-default["pbis-open"]["domain"] = "CONTOSO.COM"
+join = Chef::EncryptedDataBagItem.load("pbis-open", 'join')
+username = join['username']
+password = join['password']
+
+# Join domain
+
+if platform?("ubuntu", "debian")
+	execute "pbis-open-join-domain" do
+		action :run
+		command "/opt/pbis/bin/domainjoin-cli join #{node['pbis-open']['domain']} #{username} #{password}"
+	end
+end

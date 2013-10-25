@@ -30,3 +30,10 @@ checkpbisopeninstalled.run_command
 unless checkpbisopeninstalled.exitstatus == 0
   include_recipe "pbis-open::install"
 end
+
+checkdomainmembership = Mixlib::ShellOut.new("/opt/pbis/bin/get-status | grep 'Domain:' | grep '#{node['pbis-open']['domain']}'")
+checkdomainmembership.run_command
+
+unless checkdomainmembership.exitstatus == 0
+	include_recipe "pbis-open::join"
+end
