@@ -31,9 +31,24 @@ password = join['password']
 
 # Join domain
 
-if platform?("ubuntu", "debian")
-	execute "pbis-open-join-domain" do
-		action :run
-		command "/opt/pbis/bin/domainjoin-cli join #{node['pbis-open']['domain']} #{username} #{password}"
-	end
+execute "pbis-open-join-domain" do
+	action :run
+	command "/opt/pbis/bin/domainjoin-cli join #{node['pbis-open']['domain']} #{username} #{password}"
+end
+
+# Set some defaults
+
+execute "assume-default-domain" do
+	action :run
+	command "/opt/pbis/bin/config AssumeDefaultDomain #{node['pbis-open']['default-domain']}"
+end
+
+execute "login-shell-template" do
+	action :run
+	command "/opt/pbis/bin/config LoginShellTemplate #{node['pbis-open']['login-shell-template']}"
+end
+
+execute "home-dir-template" do
+	action :run
+	command "/opt/pbis/bin/config HomeDirTemplate #{node['pbis-open']['home-dir-template']}"
 end
